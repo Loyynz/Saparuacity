@@ -50,12 +50,18 @@ class HomeFragment : Fragment() {
         val ipEditText: EditText = this.rootView.findViewById(R.id.ip);
         val passwordEditText:EditText = this.rootView.findViewById(R.id.password);
 
-        // Restore from preferences
+        // Mengunci IP Server Anda secara otomatis dan permanen
         if (sharedPreferences != null){
-            ipEditText.setText(sharedPreferences.getString(R.id.ip.toString(), ""));
-            portEditText.setText(sharedPreferences.getString(R.id.port.toString(), ""));
-            passwordEditText.setText(sharedPreferences.getString(R.id.password.toString(), ""));
+            ipEditText.setText(sharedPreferences.getString(R.id.ip.toString(), "15.235.133.218"))
+            portEditText.setText(sharedPreferences.getString(R.id.port.toString(), "7777"))
+            passwordEditText.setText(sharedPreferences.getString(R.id.password.toString(), ""))
         }
+        
+        // Mematikan input kolom agar tidak bisa diubah oleh pemain
+        ipEditText.isEnabled = false
+        portEditText.isEnabled = false
+        ipEditText.isFocusable = false
+        portEditText.isFocusable = false
 
         ipEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
